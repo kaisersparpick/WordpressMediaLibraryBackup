@@ -28,3 +28,9 @@ Example
 ```powershell
 WordpressMediaLibraryBackup.exe export.xml C:/temp/wordpress-media-library
 ```
+
+# Other languages
+The Wordpress media library backup tool is also available in the following languages
+ - [Javascript / Node.js](https://www.npmjs.com/package/wordpress-media-library-backup-js)
+ - [PHP, Python, Perl 6](https://github.com/kaisersparpick/wordpress-media-library-backup)
+ 
