@@ -9,9 +9,9 @@ namespace WordpressMediaLibraryBackup
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("-----------------------------------\n" +
-                              "Wordpress media library backup tool\n" +
-                              "-----------------------------------");
+            Console.WriteLine("\n-----------------------------------" +
+                              "\nWordpress media library backup tool" +
+                              "\n-----------------------------------\n");
     
             if (args.Length < 2)
             {
@@ -74,13 +74,19 @@ namespace WordpressMediaLibraryBackup
 
         private static XmlNodeList GetUrls(string xmlFile)
         {
+            if (!File.Exists(xmlFile))
+            {
+                Echo("Error: Could not find file " + xmlFile, ConsoleColor.Red, null);
+                Environment.Exit(0);
+            }
+
             var doc = new XmlDocument();
             doc.Load(xmlFile);
 
             var urls = doc.GetElementsByTagName("wp:attachment_url");
             if (urls.Count == 0)
             {
-                Console.WriteLine("Error: No URLs found.");
+                Echo("Error: No URLs found.", ConsoleColor.Red, null);
                 Environment.Exit(0);
             }
 
@@ -93,7 +99,8 @@ namespace WordpressMediaLibraryBackup
             Console.ForegroundColor = color;
             Console.Write(state.PadRight(13));
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(close ? url + "\n" : url);
+            if (!string.IsNullOrWhiteSpace(url)) Console.Write(url);
+            if (close) Console.Write("\n");
         }
     }
 }
